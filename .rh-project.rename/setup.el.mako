@@ -1,4 +1,8 @@
-;; -*- coding: utf-8 -*-
+## Hey Emacs, this is -*- coding: utf-8 -*-
+<%
+  project_name = utils.kebab_case(config["project_name"])
+%>\
+;; Hey Emacs, this is -*- coding: utf-8 -*-
 
-(my-qt-app-mode 1)
-(my-qt-app-setup)
+(${project_name}-mode 1)
+(${project_name}-setup)

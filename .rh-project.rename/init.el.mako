@@ -1,4 +1,8 @@
-;; -*- coding: utf-8 -*-
+## Hey Emacs, this is -*- coding: utf-8 -*-
+<%
+  project_name = utils.kebab_case(config["project_name"])
+%>\
+;; Hey Emacs, this is -*- coding: utf-8 -*-
 
 (require 'lsp-mode)
 (require 'lsp-pyright)
@@ -6,56 +10,56 @@
 (require 'blacken)
 (require 'flycheck)
 
-;;; my-qt-app common command
+;;; ${project_name} common command
 ;;; /b/{
 
-(defvar my-qt-app/build-buffer-name
-  "*my-qt-app-build*")
+(defvar ${project_name}/build-buffer-name
+  "*${project_name}-build*")
 
-(defun my-qt-app/lint ()
+(defun ${project_name}/lint ()
   (interactive)
   (rh-project-compile
    "lint.sh"
-   my-qt-app/build-buffer-name))
+   ${project_name}/build-buffer-name))
 
 ;;; /b/}
 
-;;; my-qt-app
+;;; ${project_name}
 ;;; /b/{
 
-(defun my-qt-app/hydra-define ()
-  (defhydra my-qt-app-hydra (:color blue :columns 5)
-    "@my-qt-app workspace commands"
-    ("l" my-qt-app/lint "lint")))
+(defun ${project_name}/hydra-define ()
+  (defhydra ${project_name}-hydra (:color blue :columns 5)
+    "@${project_name} workspace commands"
+    ("l" ${project_name}/lint "lint")))
 
-(my-qt-app/hydra-define)
+(${project_name}/hydra-define)
 
-(define-minor-mode my-qt-app-mode
-  "my-qt-app project-specific minor mode."
-  :lighter " my-qt-app"
+(define-minor-mode ${project_name}-mode
+  "${project_name} project-specific minor mode."
+  :lighter " ${project_name}"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "<f9>") #'my-qt-app-hydra/body)
+            (define-key map (kbd "<f9>") #'${project_name}-hydra/body)
             map))
 
-(add-to-list 'rm-blacklist " my-qt-app")
+(add-to-list 'rm-blacklist " ${project_name}")
 
-(defun my-qt-app/lsp-python-deps-providers-path (path)
+(defun ${project_name}/lsp-python-deps-providers-path (path)
   (concat (expand-file-name (rh-project-get-root))
           ".venv/bin/"
           path))
 
-(defun my-qt-app/lsp-python-setup ()
+(defun ${project_name}/lsp-python-setup ()
   (plist-put
    lsp-deps-providers
-   :my-qt-app/local-venv
-   (list :path #'my-qt-app/lsp-python-deps-providers-path))
+   :${project_name}/local-venv
+   (list :path #'${project_name}/lsp-python-deps-providers-path))
 
   (lsp-dependency 'pyright
-                  '(:my-qt-app/local-venv "pyright-langserver")))
+                  '(:${project_name}/local-venv "pyright-langserver")))
 
-(eval-after-load 'lsp-pyright #'my-qt-app/lsp-python-setup)
+(eval-after-load 'lsp-pyright #'${project_name}/lsp-python-setup)
 
-(defun my-qt-app-setup ()
+(defun ${project_name}-setup ()
   (when buffer-file-name
     (let ((project-root (expand-file-name (rh-project-get-root)))
           file-rpath ext-js)
