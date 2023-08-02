@@ -1,3 +1,6 @@
+<%
+  project_name_pascal = utils.pascal_case(config["project_name"])
+%>\
 # Qt application main window
 
 from typing import Self
@@ -13,7 +16,7 @@ class MainWindow(QMainWindow):
 
     def initUI(self: Self) -> None:
         # Window config
-        self.setWindowTitle("PySide Application")
+        self.setWindowTitle("${project_name_pascal} Application")
         self.setFixedSize(400, 200)
 
         # Child widgets
