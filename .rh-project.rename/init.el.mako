@@ -19,7 +19,37 @@
 (defun ${project_name}/lint ()
   (interactive)
   (rh-project-compile
-   "lint.sh"
+   "poetry-run.sh lint"
+   ${project_name}/build-buffer-name))
+
+(defun ${project_name}/dev ()
+  (interactive)
+  (rh-project-compile
+   "poetry-run.sh dev"
+   ${project_name}/build-buffer-name))
+
+(defun ${project_name}/build ()
+  (interactive)
+  (rh-project-compile
+   "poetry-run.sh build"
+   ${project_name}/build-buffer-name))
+
+(defun ${project_name}/start ()
+  (interactive)
+  (rh-project-compile
+   "poetry-run.sh start"
+   ${project_name}/build-buffer-name))
+
+(defun ${project_name}/format ()
+  (interactive)
+  (rh-project-compile
+   "poetry-run.sh format"
+   ${project_name}/build-buffer-name))
+
+(defun ${project_name}/test ()
+  (interactive)
+  (rh-project-compile
+   "poetry-run.sh test"
    ${project_name}/build-buffer-name))
 
 ;;; /b/}
@@ -28,9 +58,14 @@
 ;;; /b/{
 
 (defun ${project_name}/hydra-define ()
-  (defhydra ${project_name}-hydra (:color blue :columns 5)
+  (defhydra ${project_name}-hydra (:color blue :columns 4)
     "@${project_name} workspace commands"
-    ("l" ${project_name}/lint "lint")))
+    ("l" ${project_name}/lint "lint")
+    ("d" ${project_name}/dev "dev")
+    ("b" ${project_name}/build "build")
+    ("s" ${project_name}/start "start")
+    ("f" ${project_name}/format "format")
+    ("t" ${project_name}/test "test")))
 
 (${project_name}/hydra-define)
 
