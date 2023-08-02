@@ -51,7 +51,3 @@ def start() -> None:
 def test() -> None:
     print("Starting tests...")
     subprocess.run("python -u -m unittest discover", shell=True)
-
-
-if __name__ == "__main__":
-    lint()

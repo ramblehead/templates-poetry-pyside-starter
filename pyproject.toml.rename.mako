@@ -9,15 +9,18 @@ version = "0.1.0"
 description = ""
 authors = []
 readme = "README.md"
-packages = [{ include = "${project_name_snake}" }]
+packages = [
+  { include = "my_qt_app" },
+  { include = "poetry_utils", from = "utils" },
+]
 
 [tool.poetry.scripts]
-lint = "scripts:lint"
+lint = "poetry_utils.scripts:lint"
 dev = "${project_name_snake}.main:main"
-build = "scripts:build"
-start = "scripts:start"
-format = "scripts:format_"
-test = "scripts:test"
+build = "poetry_utils.scripts:build"
+start = "poetry_utils.scripts:start"
+format = "poetry_utils.scripts:format_"
+test = "poetry_utils.scripts:test"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
