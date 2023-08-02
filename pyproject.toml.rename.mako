@@ -26,8 +26,9 @@ pyinstaller = "^5.13.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
-pyright = "^1.1.308"
-ruff = "^0.0.267"
+pyright = "^1.1.320"
+ruff = "^0.0.276"
+ruff-lsp = "^0.0.35"
 mypy = "^1.3.0"
 typing-extensions = "^4.6.3"
 
