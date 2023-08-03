@@ -243,7 +243,9 @@ def expand_and_implode(
 
     os.chdir(ctx["path"])
     sd_path = Path(__file__).parent
-    os.startfile(str(sd_path / "ms-implode.bat"))
+    os.startfile(  # noqa: S606 # type: ignore[reportGeneralTypeIssues]
+        str(sd_path / "ms-implode.bat"),
+    )
 
     # subprocess.Popen(
     #     'python -c "'
