@@ -1,4 +1,4 @@
-#!python
+#!/usr/bin/env -S python
 # Hey Emacs, this is -*- coding: utf-8; mode: python -*-
 
 import os

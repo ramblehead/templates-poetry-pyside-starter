@@ -250,7 +250,11 @@ def expand_and_implode(
             str(sd_path / "ms-implode.bat"),
         )
     else:
+        rh_template_dir_path = ctx["path"] / "rh_template"
         subprocess.Popen(
-            f'sh {sd_path / "ms-implode.sh"}',
+            'python -c "'
+            "import shutil;"
+            f"shutil.rmtree('{rh_template_dir_path}');"
+            f"shutil.os.remove('{implode_script_path_str}');\"",
             shell=True,
         )
