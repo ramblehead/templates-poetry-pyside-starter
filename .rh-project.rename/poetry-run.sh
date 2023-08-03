@@ -12,7 +12,7 @@ SDPATH="$(cd "${SDPATH}" && pwd)"
 readonly SDPATH
 
 if [[ -z ${1:+-} ]]; then
-  echo "Usage: "${SNAME}" <command>"
+  echo "Usage: \"${SNAME}\" <command>"
   echo "where command is poetry run <command>"
   exit 1
 fi
