@@ -2,8 +2,8 @@
 <%
   project_name = utils.snake_case(config["project_name"])
 %>\
+import platform
 import subprocess
-import sys
 
 from PyInstaller import __main__ as pyinstaller
 
@@ -42,7 +42,7 @@ def start() -> None:
 
     command = (
         f".\\dist\\{APP_NAME}\\{APP_NAME}.exe"
-        if sys.platform == "win32"
+        if platform.system() == "Windows"
         else f"./dist/{APP_NAME}/{APP_NAME}"
     )
     subprocess.run(command, shell=True)

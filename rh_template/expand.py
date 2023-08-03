@@ -2,6 +2,7 @@
 
 import importlib.util
 import os
+import platform
 import shutil
 import subprocess
 from pathlib import Path
@@ -243,23 +244,13 @@ def expand_and_implode(
 
     os.chdir(ctx["path"])
     sd_path = Path(__file__).parent
-    os.startfile(  # noqa: S606 # type: ignore[reportGeneralTypeIssues]
-        str(sd_path / "ms-implode.bat"),
-    )
 
-    # subprocess.Popen(
-    #     'python -c "'
-    #     "import shutil, time;"
-    #     "time.sleep(1);"
-    #     f"[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"
-    #     'time.sleep(1);"',
-    #     # " && "
-    #     # f'"{sd_path / "ms-implode.bat"}"',
-    #     # f"shutil.rmtree('{rh_template_dir_path}');"
-    #     # f"shutil.os.remove('{implode_script_path_str}');\"",
-    #     shell=True,
-    # )
-
-    # os.startfile(f'"{sd_path / "ms-implode.bat"}"')
-
-    # subprocess.Popen(str(sd_path / "ms-implode.bat"), shell=True)
+    if platform.system() == "Windows":
+        os.startfile(  # noqa: S606 # type: ignore[reportGeneralTypeIssues]
+            str(sd_path / "ms-implode.bat"),
+        )
+    else:
+        subprocess.Popen(
+            f'sh {sd_path / "ms-implode.sh"}',
+            shell=True,
+        )
