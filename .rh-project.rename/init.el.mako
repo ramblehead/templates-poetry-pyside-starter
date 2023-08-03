@@ -144,13 +144,14 @@
           (setq-local blacken-executable
                       (file-name-concat project-root ".venv/bin/black"))
 
+          (blacken-mode 1)
+
           ;;; /b/}
 
           (setq-local lsp-enabled-clients '(pyright ruff-lsp))
           (setq-local lsp-before-save-edits nil)
           (setq-local lsp-modeline-diagnostics-enable nil)
 
-          (blacken-mode 1)
           ;; (run-with-idle-timer 0 nil #'lsp)
           (lsp-deferred)))))))
 
