@@ -234,17 +234,17 @@ def expand_and_implode(
     pyc_paths = get_paths_by_ext(ctx["path"], "__pycache__", with_dirs=True)
     pyc_path_strs = [str(p) for p in pyc_paths]
 
+    sd_path = Path(__file__).parent
+
     subprocess.Popen(
-        f'python -c "[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"',
-        # 'python -c "'
-        # "import shutil, time;"
-        # "time.sleep(1);"
-        # f'[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"',
+        'python -c "'
+        "import shutil, time;"
+        "time.sleep(1);"
+        f'[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];";'
+        f'"{sd_path / "ms-implode.bat"}")',
         # f"shutil.rmtree('{rh_template_dir_path}');"
         # f"shutil.os.remove('{implode_script_path_str}');\"",
         shell=True,
     )
 
-    sd_path = Path(__file__).parent
-
-    subprocess.Popen(str(sd_path / "ms-implode.bat"), shell=True)
+    # subprocess.Popen(str(sd_path / "ms-implode.bat"), shell=True)
