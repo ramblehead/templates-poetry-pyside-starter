@@ -234,12 +234,16 @@ def expand_and_implode(
     pyc_paths = get_paths_by_ext(ctx["path"], "__pycache__", with_dirs=True)
     pyc_path_strs = [str(p) for p in pyc_paths]
 
-    sd_path = Path(__file__).parent
-
     subprocess.Popen(
-        f'python -c "import time; time.sleep(1);" && "{sd_path / "ms-implode.bat"}"',
+        'python -c "'
+        "import shutil;"
+        f'[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"',
         shell=True,
     )
+
+    os.chdir(ctx["path"])
+    sd_path = Path(__file__).parent
+    os.startfile(str(sd_path / "ms-implode.bat"))
 
     # subprocess.Popen(
     #     'python -c "'
