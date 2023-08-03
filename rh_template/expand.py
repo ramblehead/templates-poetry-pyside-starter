@@ -243,7 +243,7 @@ def expand_and_implode(
         f"[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"
         'time.sleep(1);"'
         " && "
-        f'"{sd_path / "ms-implode.bat"}")',
+        f'"{sd_path / "ms-implode.bat"}"',
         # f"shutil.rmtree('{rh_template_dir_path}');"
         # f"shutil.os.remove('{implode_script_path_str}');\"",
         shell=True,
