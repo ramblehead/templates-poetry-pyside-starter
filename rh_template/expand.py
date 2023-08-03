@@ -247,4 +247,4 @@ def expand_and_implode(
 
     sd_path = Path(__file__).parent
 
-    subprocess.Popen(sd_path / "ms-implode.bat", shell=True)
+    subprocess.Popen(str(sd_path / "ms-implode.bat"), shell=True)
