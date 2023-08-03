@@ -236,18 +236,18 @@ def expand_and_implode(
 
     sd_path = Path(__file__).parent
 
-    subprocess.Popen(
-        'python -c "'
-        "import shutil, time;"
-        "time.sleep(1);"
-        f"[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"
-        'time.sleep(1);"',
-        # " && "
-        # f'"{sd_path / "ms-implode.bat"}"',
-        # f"shutil.rmtree('{rh_template_dir_path}');"
-        # f"shutil.os.remove('{implode_script_path_str}');\"",
-        shell=True,
-    )
+    # subprocess.Popen(
+    #     'python -c "'
+    #     "import shutil, time;"
+    #     "time.sleep(1);"
+    #     f"[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"
+    #     'time.sleep(1);"',
+    #     # " && "
+    #     # f'"{sd_path / "ms-implode.bat"}"',
+    #     # f"shutil.rmtree('{rh_template_dir_path}');"
+    #     # f"shutil.os.remove('{implode_script_path_str}');\"",
+    #     shell=True,
+    # )
 
     os.startfile(f'"{sd_path / "ms-implode.bat"}"')
 
