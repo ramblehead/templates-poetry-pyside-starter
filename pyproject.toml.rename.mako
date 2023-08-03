@@ -10,7 +10,7 @@ description = ""
 authors = []
 readme = "README.md"
 packages = [
-  { include = "my_qt_app" },
+  { include = "${project_name_snake}" },
   { include = "poetry_utils", from = "utils" },
 ]
 
