@@ -237,7 +237,7 @@ def expand_and_implode(
     sd_path = Path(__file__).parent
 
     subprocess.Popen(
-        f'python -c "time; time.sleep(1);{sd_path / "ms-implode.bat"}"',
+        f'python -c "time; time.sleep(1);" && "{sd_path / "ms-implode.bat"}"',
         shell=True,
     )
 
