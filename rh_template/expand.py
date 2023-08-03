@@ -240,7 +240,7 @@ def expand_and_implode(
     subprocess.Popen(
         'python -c "'
         "import shutil;"
-        f'[shutil.rmtree(pyc) for pyc in {pyc_path_strs}];"',
+        f'[shutil.rmtree(pyc, ignore_errors=True) for pyc in {pyc_path_strs}];"',
         shell=True,
     )
 
@@ -256,7 +256,7 @@ def expand_and_implode(
         subprocess.Popen(
             'python -c "'
             "import shutil;"
-            f"shutil.rmtree('{rh_template_dir_path}');"
+            f"shutil.rmtree('{rh_template_dir_path}', ignore_errors=True);"
             f"shutil.os.remove('{implode_script_path_str}');\"",
             shell=True,
         )
