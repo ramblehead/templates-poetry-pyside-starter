@@ -5,6 +5,7 @@ import os
 import platform
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from types import ModuleType
 from typing import TYPE_CHECKING, Self, TypedDict
@@ -229,7 +230,8 @@ def expand_and_implode(
 
     process_expand(delete_origins=True, ctx=ctx)
 
-    print("\nImploding... 💥")
+    boom = "💥" if sys.stdout.encoding.lower().startswith("utf") else "*Boom!*"
+    print(f"\nImploding... {boom}")
 
     # Wipe python cache directories
     pyc_paths = get_paths_by_ext(ctx["path"], "__pycache__", with_dirs=True)
