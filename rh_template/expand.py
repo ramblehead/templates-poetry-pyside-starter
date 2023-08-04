@@ -230,7 +230,7 @@ def expand_and_implode(
 
     process_expand(delete_origins=True, ctx=ctx)
 
-    boom = "💥" if (platform.system() == "Windows") else "*Boom!*"
+    boom = "💥" if (platform.system() != "Windows") else "*Boom!*"
     print(f"\nImploding... {boom}")
 
     # Wipe python cache directories
