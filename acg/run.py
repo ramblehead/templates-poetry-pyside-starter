@@ -6,7 +6,7 @@ from pathlib import Path
 from autocodegen import generate
 
 if __name__ == "__main__":
-    project_root = Path(__file__).parent.resolve(strict=True)
-    acg_template_path = project_root / "poetry-pyside-starter"
+    project_root = Path(__file__).parent.parent.resolve(strict=True)
+    acg_template_path = project_root / "acg"
 
     generate(project_root, acg_template_path)
