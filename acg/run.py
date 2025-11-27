@@ -3,11 +3,10 @@
 
 from pathlib import Path
 
-from autocodegen import expand_and_implode
+from autocodegen import generate
 
 if __name__ == "__main__":
-    acg_path = (Path(__file__).parent / "poetry-pyside-starter").resolve(
-        strict=True,
-    )
+    project_root = Path(__file__).parent.resolve(strict=True)
+    acg_template_path = project_root / "poetry-pyside-starter"
 
-    expand_and_implode(acg_path)
+    generate(project_root, acg_template_path)
