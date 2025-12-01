@@ -23,9 +23,9 @@ format = "poetry_utils.scripts:format_"
 test = "poetry_utils.scripts:test"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
-pyside6 = "^6.5.2"
-pyinstaller = "^5.13.0"
+python = ">=3.11,<3.15"
+pyside6 = "^6.10.1"
+pyinstaller = "^6.17.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
