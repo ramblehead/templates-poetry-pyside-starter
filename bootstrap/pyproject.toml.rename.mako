@@ -15,12 +15,12 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-lint = "poetry_utils.scripts:lint"
+lint = "${project_name_snake}.scripts:lint"
 dev = "${project_name_snake}.main:main"
-build = "poetry_utils.scripts:build"
-start = "poetry_utils.scripts:start"
-format = "poetry_utils.scripts:format_"
-test = "poetry_utils.scripts:test"
+build = "${project_name_snake}.scripts:build"
+start = "${project_name_snake}.scripts:start"
+format = "${project_name_snake}.scripts:format_"
+test = "${project_name_snake}.scripts:test"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.15"
