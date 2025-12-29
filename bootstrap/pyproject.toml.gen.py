@@ -1,8 +1,14 @@
-## Hey Emacs, this is -*- coding: utf-8 -*-
-<%
-  project_name_kebab = utils.kebab_case(config["project_name"])
-  project_name_snake = utils.snake_case(config["project_name"])
-%>\
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
+from string import Template
+from typing import TYPE_CHECKING
+
+from autocodegen.utils import kebab_case, snake_case
+
+if TYPE_CHECKING:
+    from autocodegen import Context
+
+template_str = """\
 [tool.poetry]
 name = "${project_name_kebab}"
 version = "0.1.0"
@@ -69,3 +75,15 @@ line-length = 79
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+"""
+
+
+def generate(ctx: Context) -> str:
+    project_name = ctx.project_config.autocodegen.project_name
+
+    return Template(template_str).substitute(
+        {
+            "project_name_kebab": kebab_case(project_name),
+            "project_name_snake": snake_case(project_name),
+        },
+    )

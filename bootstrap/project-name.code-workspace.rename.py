@@ -1,3 +1,5 @@
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
