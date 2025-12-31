@@ -1,7 +1,14 @@
-## Hey Emacs, this is -*- coding: utf-8 -*-
-<%
-  project_name = utils.snake_case(config["project_name"])
-%>\
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
+from string import Template
+from typing import TYPE_CHECKING
+
+from autocodegen.utils import snake_case
+
+if TYPE_CHECKING:
+    from autocodegen import Context
+
+template_str = """\
 # Qt GUI app entry file
 
 import sys
@@ -10,8 +17,8 @@ from types import TracebackType
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
-from ${project_name}.utils import logger
-from ${project_name}.views import MainWindow
+from ${project_name_snake}.utils import logger
+from ${project_name_snake}.views import MainWindow
 
 
 def handleException(
@@ -29,7 +36,7 @@ def handleException(
     QMessageBox.critical(
         None,  # type: ignore reportGeneralTypeIssues
         "Unhandled Exception",
-        "An unhandled exception occurred.\n\n" + error_details,
+        "An unhandled exception occurred.\\n\\n" + error_details,
     )
     QApplication.quit()
 
@@ -49,3 +56,14 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+"""
+
+
+def generate(ctx: Context) -> str:
+    project_name = ctx.project_config.autocodegen.project_name
+
+    return Template(template_str).substitute(
+        {
+            "project_name_snake": snake_case(project_name),
+        },
+    )
