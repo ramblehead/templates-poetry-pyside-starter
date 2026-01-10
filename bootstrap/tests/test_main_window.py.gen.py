@@ -1,8 +1,14 @@
-## Hey Emacs, this is -*- coding: utf-8 -*-
-<%
-  project_name_snake = utils.snake_case(config["project_name"])
-  project_name_pascal = utils.pascal_case(config["project_name"])
-%>\
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
+from string import Template
+from typing import TYPE_CHECKING
+
+from autocodegen.utils import pascal_case, snake_case
+
+if TYPE_CHECKING:
+    from autocodegen import Context
+
+template_str = """\
 import sys
 import unittest
 from typing import Self, TypeVar
@@ -35,3 +41,15 @@ class TestMainWindow(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+"""
+
+
+def generate(ctx: Context) -> str:
+    project_name = ctx.project_config.autocodegen.project_name
+
+    return Template(template_str).substitute(
+        {
+            "project_name_snake": snake_case(project_name),
+            "project_name_pascal": pascal_case(project_name),
+        },
+    )

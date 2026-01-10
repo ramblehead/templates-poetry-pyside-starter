@@ -1,13 +1,20 @@
-## Hey Emacs, this is -*- coding: utf-8 -*-
-<%
-  project_name = utils.snake_case(config["project_name"])
-%>\
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
+from string import Template
+from typing import TYPE_CHECKING
+
+from autocodegen.utils import snake_case
+
+if TYPE_CHECKING:
+    from autocodegen import Context
+
+template_str = """\
 import platform
 import subprocess
 
 from PyInstaller import __main__ as pyinstaller
 
-APP_NAME: str = "${project_name}"
+APP_NAME: str = "${project_name_snake}"
 
 
 def lint() -> None:
@@ -28,7 +35,7 @@ def build() -> None:
     print("Building application...")
     pyinstaller.run(
         [
-            "${project_name}/main.py",
+            "${project_name_snake}/main.py",
             "--name",
             APP_NAME,
             "-y",
@@ -51,3 +58,14 @@ def start() -> None:
 def test() -> None:
     print("Starting tests...")
     subprocess.run("python -u -m unittest discover", shell=True)
+"""
+
+
+def generate(ctx: Context) -> str:
+    project_name = ctx.project_config.autocodegen.project_name
+
+    return Template(template_str).substitute(
+        {
+            "project_name_snake": snake_case(project_name),
+        },
+    )

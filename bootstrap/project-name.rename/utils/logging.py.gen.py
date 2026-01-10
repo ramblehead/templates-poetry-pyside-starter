@@ -1,10 +1,17 @@
-## Hey Emacs, this is -*- coding: utf-8 -*-
-<%
-  project_name = utils.snake_case(config["project_name"])
-%>\
+# Hey Emacs, this is -*- coding: utf-8 -*-
+
+from string import Template
+from typing import TYPE_CHECKING
+
+from autocodegen.utils import snake_case
+
+if TYPE_CHECKING:
+    from autocodegen import Context
+
+template_str = """\
 import logging
 
-from ${project_name} import __name__ as name
+from ${project_name_snake} import __name__ as name
 
 log_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
@@ -22,3 +29,14 @@ file_handler = logging.FileHandler(f"{name}.log", mode="w")
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(log_formatter)
 logger.addHandler(file_handler)
+"""
+
+
+def generate(ctx: Context) -> str:
+    project_name = ctx.project_config.autocodegen.project_name
+
+    return Template(template_str).substitute(
+        {
+            "project_name_snake": snake_case(project_name),
+        },
+    )
